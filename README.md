@@ -7,6 +7,8 @@ A web app for tracking combat in DnD 5e.
 - Python
 
 ## Use
+- ```.\venv\Scripts\activate``` to activate virtual env.
+- ```deactivate``` to deactivate virtual env.
 - ```py -m flask run```
 
 ## TODO
