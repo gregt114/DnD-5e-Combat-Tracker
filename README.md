@@ -1,6 +1,13 @@
 # Combat-Tracker_v2
 
-A web app for tracking combat in DnD 5e
+A web app for tracking combat in DnD 5e.
+
+## Requirements
+- Flask
+- Python
+
+## Use
+- ```py -m flask run```
 
 ## TODO
 
@@ -9,4 +16,4 @@ A web app for tracking combat in DnD 5e
     - JS for UI
 - Backend
     - Flask
-    - mySql + db setup
+    - SQLlite + db setup
