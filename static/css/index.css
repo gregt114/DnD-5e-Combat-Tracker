@@ -1,0 +1,17 @@
+.grid-container {
+    display: grid;
+}
+
+.left {
+    grid-column-start: 1;
+    grid-column-end: 5;
+
+    gap: 1em;
+}
+
+.right {
+    grid-column-start: 6;
+    grid-column-end: 10;
+
+    gap: 1em;
+}
