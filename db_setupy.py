@@ -16,10 +16,10 @@ def db_setup():
         crsr.execute(command)
 
     # save changes and close the connection
+    connection.commit()
     print("DB setup successful")
     print("Closing database connection...")
     print()
-    connection.commit()
     connection.close()
 
 
