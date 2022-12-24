@@ -1,3 +1,9 @@
+body {
+    background-color: #000;
+    color: white;
+}
+
+/* 2 column setup */
 .grid-container {
     display: grid;
 }
@@ -16,13 +22,15 @@
     gap: 1em;
 }
 
+/* Card data styling */
 .card {
     display: grid;
-    border: 0.2em solid black;
-    margin: 0.1em;
+    border: 0.1em solid #0000bb;
+    border-radius: 0.25em;
+    background-color: #303030;
+    margin: 1.5em;
 }
 
-/* Card data styling */
 .name {
     grid-row: 1 / span 2;
     grid-column: 1 / span 2;
@@ -30,12 +38,13 @@
     font-size: 1.5em;
 }
 
-.initiative {
+.AC {
     grid-row: 1 / span 1;
     grid-column: 4 / span 1;
+    margin-bottom: 0.25em;
 }
 
-.AC {
+.initiative {
     grid-row: 1 / span 1;
     grid-column: 5 / span 1;
 }
@@ -53,15 +62,23 @@
 .conditions {
     grid-row: 3 / span 1;
     grid-column: 1 / span 4;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .details {
     grid-row: 4 / span 1;
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 5;
+
+}
+
+.details input {
+    width: 99%;
 }
 
 input {
     border: none;
+    background-color: #444;
 }
 
 input[type="number"] {

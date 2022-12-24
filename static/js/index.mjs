@@ -22,7 +22,7 @@ function generate_empty_card() {
         </label>
         <label class="AC">AC: <input type="number"></label>
         <label class="initiative">Initiative: <input type="number"></label>
-        <div class="conditions">conditions</div>
+        <div class="conditions">Conditions:</div>
         <label class="details">Details: <input type="text"></label>
     </div>`
 }
