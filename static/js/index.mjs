@@ -19,9 +19,11 @@ function generate_empty_card() {
         <label class="AC">AC: <input type="number"></label>
         <label class="initiative">Initiative: <input type="number"></label>
         <label class="curHP">
-            HP: <input type="number"> / 
-            <input type="number">
+            HP: <input type="number"> / <input type="number">
         </label>
+        <div class="heal-damage">
+            <button>Heal / Damage</button> <input type="number">
+        </div>
         <div class="conditions">Conditions:</div>
         <label class="details">Details: <input type="text"></label>
     </div>`
