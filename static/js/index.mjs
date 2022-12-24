@@ -1,28 +1,37 @@
 
 import { Character } from "./character.js"
 
-function generate_card() {
-    let text = `
-    <div class="w3-card-4">
-        <header class="w3-container w3-blue">
-            <h1>Header ------------------</h1>
-        </header>
-        <div class="w3-container">
-            <p>content</p>
-        </div>
-        <footer class="w3-container w3-blue">
-            <h5>footer</h5>
-        </footer>
+// function generate_empty_card() {
+//     return `<div class="card">
+//         <input class="name" type="text" placeholder="Name">
+//         <label>HP:<input class="curHP" type="text" placeholder="HP"></label>
+//         <input class="maxHP" type="text" placeholder="Max HP">
+//         <input class="AC" type="text" placeholder="AC">
+//         <input class="initiative" type="text" placeholder="Initiative">
+//         <div class="conditions">conditions</div>
+//         <input class="details" type="text" placeholder="Details">
+//     </div>`
+// }
+
+function generate_empty_card() {
+    return `<div class="card">
+        <input class="name" type="text" placeholder="Name">
+        <label class="curHP">
+            HP: <input type="number"> / 
+            <input type="number">
+        </label>
+        <label class="AC">AC: <input type="number"></label>
+        <label class="initiative">Initiative: <input type="number"></label>
+        <div class="conditions">conditions</div>
+        <label class="details">Details: <input type="text"></label>
     </div>`
-    return text;
 }
 
-let left = document.getElementsByClassName('left')[0];
-let test = document.getElementById('test');
-let btn = document.getElementById('btn');
 
-btn.addEventListener('click', () => {
-    test.innerHTML = generate_card();
-    left.appendChild(test);
+$("#party-add").click(() => {
+    $("#left").append(generate_empty_card());
 });
 
+$("#enemy-add").click(() => {
+    $("#right").append(generate_empty_card());
+});

@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DnD 5e Combat Tracker v2</title>
 
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!--Style-->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../static/css/index.css">
 </head>
 
@@ -17,40 +18,14 @@
     <h1>DnD 5e Combat Tracker v2</h1>
 
     <div class="grid-container">
-
-        <div class="left">
-            <div class="w3-card-4">
-                <header class="w3-container w3-blue">
-                    <h1>Header ------------------</h1>
-                </header>
-                <div class="w3-container">
-                    <p>content</p>
-                </div>
-                <footer class="w3-container w3-blue">
-                    <h5>footer</h5>
-                </footer>
-            </div>
+        <div id="left">
+            <button id="party-add">Add Party Member</button>
         </div>
 
-        <div class="right">
-            <div class="w3-card-4">
-                <header class="w3-container w3-red">
-                    <h1>Header ------------------</h1>
-                </header>
-                <div class="w3-container">
-                    <p>content</p>
-                </div>
-                <footer class="w3-container w3-red">
-                    <h5>Footer</h5>
-                </footer>
-            </div>
+        <div id="right">
+            <button id="enemy-add">Add Enemy</button>
         </div>
-
     </div>
-
-    <button id="btn">Button</button>
-    <div id="test"></div>
-
 </body>
 
 <script type="module" src="../static/js/index.mjs"></script>

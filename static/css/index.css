@@ -2,16 +2,68 @@
     display: grid;
 }
 
-.left {
+#left {
     grid-column-start: 1;
     grid-column-end: 1;
 
     gap: 1em;
 }
 
-.right {
+#right {
     grid-column-start: 3;
     grid-column-end: 3;
 
     gap: 1em;
+}
+
+.card {
+    display: grid;
+    border: 0.2em solid black;
+    margin: 0.1em;
+}
+
+/* Card data styling */
+.name {
+    grid-row: 1 / span 2;
+    grid-column: 1 / span 2;
+
+    font-size: 1.5em;
+}
+
+.initiative {
+    grid-row: 1 / span 1;
+    grid-column: 4 / span 1;
+}
+
+.AC {
+    grid-row: 1 / span 1;
+    grid-column: 5 / span 1;
+}
+
+.curHP {
+    grid-row: 2 / span 1;
+    grid-column: 4 / span 1;
+}
+
+.maxHP {
+    grid-row: 2 / span 1;
+    grid-column: 5 / span 1;
+}
+
+.conditions {
+    grid-row: 3 / span 1;
+    grid-column: 1 / span 4;
+}
+
+.details {
+    grid-row: 4 / span 1;
+    grid-column: 1 / span 4;
+}
+
+input {
+    border: none;
+}
+
+input[type="number"] {
+    width: 3em;
 }
