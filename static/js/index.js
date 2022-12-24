@@ -30,13 +30,25 @@ function generate_empty_card() {
 }
 
 
-$("#party-add").click(() => {
-    $("#left").append(generate_empty_card());
-});
+// Save data for the given side(left or right) to a JSON file
+function save_side(side) {
 
-$("#enemy-add").click(() => {
-    $("#right").append(generate_empty_card());
-});
+    let filename = (side === "left") ? "party.json" : "enemy.json";
+
+    // Get data in JSON format
+    let characters = get_characters(side);
+    let data = JSON.stringify(characters);
+
+    // Create download link
+    let dataString = "data:text/json;charset=utf-8," + encodeURIComponent(data);
+    let a = document.createElement("a");
+    a.setAttribute("href", dataString);
+    a.setAttribute("download", filename);
+
+    // Download file and remove download link
+    a.click();
+    a.remove();
+}
 
 
 // Returns list of Character objects on the given side(left or right)
@@ -60,6 +72,27 @@ function get_characters(side) {
     return characters;
 
 }
+
+
+
+// ------------------ Event Handlers ------------------
+$("#party-save").click(() => {
+    save_side("left");
+});
+
+$("#enemy-save").click(() => {
+    save_side("right");
+});
+
+$("#party-add").click(() => {
+    $("#left").append(generate_empty_card());
+});
+
+$("#enemy-add").click(() => {
+    $("#right").append(generate_empty_card());
+});
+// -----------------------------------------------------
+
 
 // FOR TESTING PURPOSES ONLY --- REMOVE LATER
 $("#test").click(() => {
