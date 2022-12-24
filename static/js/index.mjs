@@ -16,12 +16,12 @@ import { Character } from "./character.js"
 function generate_empty_card() {
     return `<div class="card">
         <input class="name" type="text" placeholder="Name">
+        <label class="AC">AC: <input type="number"></label>
+        <label class="initiative">Initiative: <input type="number"></label>
         <label class="curHP">
             HP: <input type="number"> / 
             <input type="number">
         </label>
-        <label class="AC">AC: <input type="number"></label>
-        <label class="initiative">Initiative: <input type="number"></label>
         <div class="conditions">Conditions:</div>
         <label class="details">Details: <input type="text"></label>
     </div>`

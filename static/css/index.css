@@ -79,6 +79,7 @@ body {
 input {
     border: none;
     background-color: #444;
+    color: #ccc;
 }
 
 input[type="number"] {
