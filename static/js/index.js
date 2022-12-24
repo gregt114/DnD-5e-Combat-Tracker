@@ -39,7 +39,7 @@ $("#enemy-add").click(() => {
 });
 
 
-// Returns list of Character objects on the given side
+// Returns list of Character objects on the given side(left or right)
 // TODO: add conditions
 function get_characters(side) {
     let cards = $("#" + side).find(".card");

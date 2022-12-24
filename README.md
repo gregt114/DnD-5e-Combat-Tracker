@@ -16,8 +16,7 @@ A web app for tracking combat in DnD 5e.
 ## TODO
 
 - Frontend
-    - UI organization
-    - JS for UI
+    - Icons for conditions
+    - Drop-down large textbox for notes
 - Backend
-    - Flask
     - SQLlite + db setup
