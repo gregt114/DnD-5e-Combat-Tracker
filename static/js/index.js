@@ -3,8 +3,8 @@
 function make_character(name, AC, initiative, curHp, maxHp, conditions, notes) {
     return {
         "name": name,               // string
-        "curHp": curHp,             // number
-        "maxHp": maxHp,             // number
+        "curHP": curHp,             // number
+        "maxHP": maxHp,             // number
         "AC": AC,                   // number
         "initiative": initiative,   // number
         "conditions": conditions,   // {key1: bool, key2: bool, ...}
@@ -12,21 +12,26 @@ function make_character(name, AC, initiative, curHp, maxHp, conditions, notes) {
     }
 }
 
-// Returns HTML for an empty card element
-function generate_empty_card() {
+// Returns card HTML for a given Character object
+function generate_card(character) {
     return `<div class="card">
-        <input class="name-input" type="text" placeholder="Name">
-        <label class="AC">AC: <input class="AC-input" type="number"></label>
-        <label class="initiative">Initiative: <input class="initiative-input" type="number"></label>
+        <input class="name-input" type="text" placeholder="Name" value="${character.name}">
+        <label class="AC">AC: <input class="AC-input" type="number" value="${character.AC}"></label>
+        <label class="initiative">Initiative: <input class="initiative-input" type="number" value="${character.initiative}"></label>
         <label class="curHP">
-            HP: <input class="curHP-input" type="number"> / <input class="maxHP-input" type="number">
+            HP: <input class="curHP-input" type="number" value="${character.curHP}"> / <input class="maxHP-input" type="number" value="${character.maxHP}">
         </label>
         <div class="heal-damage">
             <button>Heal / Damage</button> <input type="number">
         </div>
         <div class="conditions">Conditions:</div>
-        <label class="notes">Notes: <input class="notes-input" type="text"></label>
+        <label class="notes">Notes: <input class="notes-input" type="text" value="${character.notes}"></label>
     </div>`
+}
+
+// Returns card HTML for an empty card
+function generate_empty_card() {
+    return generate_card(make_character("", 0, 0, 0, 0, {}, ""));
 }
 
 
@@ -48,6 +53,29 @@ function save_side(side) {
     // Download file and remove download link
     a.click();
     a.remove();
+}
+
+// Load data for the given side(left or right) from a JSON file
+function load_side(side) {
+
+    // Determine which side to get file from
+    let file_input = (side === "left") ? document.getElementById("party-load") : document.getElementById("enemy-load");
+
+    // Create file object and reader
+    let file = file_input.files[0];
+    let reader = new FileReader();
+
+    // Add listener on reader, pass file to reader
+    reader.addEventListener("load", function () {
+        let characters = JSON.parse(this.result);
+        // For each character, add card to the appropriate side
+        characters.forEach(c => {
+            $("#" + side).append(generate_card(c));
+        });
+    });
+
+    // Fire event
+    reader.readAsText(file);
 }
 
 
@@ -90,6 +118,14 @@ $("#party-add").click(() => {
 
 $("#enemy-add").click(() => {
     $("#right").append(generate_empty_card());
+});
+
+$("#party-load").change(() => {
+    load_side("left");
+});
+
+$("#enemy-load").change(() => {
+    load_side("right");
 });
 // -----------------------------------------------------
 
