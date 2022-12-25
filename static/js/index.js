@@ -128,12 +128,3 @@ $("#enemy-load").change(() => {
     load_side("right");
 });
 // -----------------------------------------------------
-
-
-// FOR TESTING PURPOSES ONLY --- REMOVE LATER
-$("#test").click(() => {
-    get_characters("left").forEach(c => {
-        let string = "<p>" + JSON.stringify(c) + "</p>";
-        $("body").append(string);
-    });
-});
