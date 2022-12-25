@@ -24,7 +24,24 @@ function generate_card(character) {
         <div class="heal-damage">
             <button>Heal / Damage</button> <input type="number">
         </div>
-        <div class="conditions">Conditions:</div>
+        <div class="conditions">
+            <i class="fa fa-eye-slash blinded"></i>
+            <i class="fa fa-heart charmed"></i>
+            <i class="fa fa-linux dead"></i>
+            <i class="fa fa-bell-slash deafened"></i>
+            <i class="fa fa-warning frightened"></i>
+            <i class="fa fa-crosshairs hunters-mark"></i>
+            <i class="fa fa fa-tripadvisor hex"></i>
+            <i class="fa fa-hand-paper-o grappled"></i>
+            <i class="fa fa-close incapacitated"></i>
+            <i class="fa fa-moon-o invisible"></i>
+            <i class="fa fa-bolt paralyzed"></i>
+            <i class="fa fa-snowflake-o petrified"></i>
+            <i class="fa fa-flask poisoned"></i>
+            <i class="fa fa-lock restrained"></i>
+            <i class="fa fa-star stunned"></i>
+            <i class="fa fa-bed unconscious"></i>
+        </div>
         <label class="notes">Notes: <input class="notes-input" type="text" value="${character.notes}"></label>
     </div>`
 }
@@ -104,27 +121,43 @@ function get_characters(side) {
 
 
 // ------------------ Event Handlers ------------------
-$("#party-save").click(() => {
-    save_side("left");
-});
+$(document).ready(function () {
+    $("#party-save").click(() => {
+        save_side("left");
+    });
 
-$("#enemy-save").click(() => {
-    save_side("right");
-});
+    $("#enemy-save").click(() => {
+        save_side("right");
+    });
 
-$("#party-add").click(() => {
-    $("#left").append(generate_empty_card());
-});
+    $("#party-add").click(() => {
+        $("#left").append(generate_empty_card());
+    });
 
-$("#enemy-add").click(() => {
-    $("#right").append(generate_empty_card());
-});
+    $("#enemy-add").click(() => {
+        $("#right").append(generate_empty_card());
+    });
 
-$("#party-load").change(() => {
-    load_side("left");
-});
+    $("#party-load").change(() => {
+        load_side("left");
+    });
 
-$("#enemy-load").change(() => {
-    load_side("right");
+    $("#enemy-load").change(() => {
+        load_side("right");
+    });
+
+    // Creates event handlers dynamically using event delegation
+    // Can't do it normal way since icons haven't been created yet
+    // TODO: find better solution
+    $(document).on("click", ".fa", function () {
+        let current_color = $(this).css("color");
+        console.log(current_color);
+        if (current_color === "rgb(68, 68, 68)") { // grey
+            $(this).css("color", "white");
+        }
+        else {
+            $(this).css("color", "#444");
+        }
+    });
 });
 // -----------------------------------------------------

@@ -97,3 +97,9 @@ input {
 input[type="number"] {
     width: 4em;
 }
+
+/* Condition Icons */
+.fa {
+    font-size: 1.25em;
+    color: #444;
+}
