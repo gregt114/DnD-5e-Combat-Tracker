@@ -24,3 +24,6 @@ A web app for tracking combat in DnD 5e.
     - Make grid layout better
 - Backend
     - SQLlite + db setup
+- Deployment
+    - Deploy on Digital Ocean droplet or PythonAnywhere
+    - Gunicorn WSGI server
