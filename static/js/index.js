@@ -18,6 +18,7 @@ function generate_card(character) {
         <input class="name-input" type="text" placeholder="Name" value="${character.name}">
         <label class="AC">AC: <input class="AC-input" type="number" value="${character.AC}"></label>
         <label class="initiative">Initiative: <input class="initiative-input" type="number" value="${character.initiative}"></label>
+        <i class="fa fa-trash"></i>
         <label class="curHP">
             HP: <input class="curHP-input" type="number" value="${character.curHP}"> / <input class="maxHP-input" type="number" value="${character.maxHP}">
         </label>
@@ -146,18 +147,17 @@ $(document).ready(function () {
         load_side("right");
     });
 
+
     // Creates event handlers dynamically using event delegation
     // Can't do it normal way since icons haven't been created yet
     // TODO: find better solution
     $(document).on("click", ".fa", function () {
-        let current_color = $(this).css("color");
-        console.log(current_color);
-        if (current_color === "rgb(68, 68, 68)") { // grey
-            $(this).css("color", "white");
-        }
-        else {
-            $(this).css("color", "#444");
-        }
+        $(this).toggleClass("icon-selected");
+    });
+
+    // Need to do same thing as above but for trash icon
+    $(document).on("click", ".fa-trash", function () {
+        $(this).parent().remove();
     });
 });
 // -----------------------------------------------------
