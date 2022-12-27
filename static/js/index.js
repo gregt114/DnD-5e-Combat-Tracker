@@ -156,7 +156,7 @@ $(document).ready(function () {
     });
 
     // Need to do same thing as above but for trash icon
-    $(document).on("click", ".fa-trash", function () {
+    $(document).on("click", ".fa-trash-can", function () {
         $(this).parent().remove();
     });
 });
