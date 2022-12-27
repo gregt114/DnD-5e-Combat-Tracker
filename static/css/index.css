@@ -68,7 +68,7 @@ body {
     width: 4em;
 }
 
-.fa-trash {
+.fa-trash-can {
     grid-row: 3 / span 1;
     grid-column: 4 / span 1;
 }
@@ -103,16 +103,16 @@ input[type="number"] {
 }
 
 /* Condition Icons */
-.fa {
+.conditions i {
     font-size: 1.25em;
     color: #444;
 }
 
-.fa:hover {
+.conditions i:hover {
     color: #ccc;
 }
 
 /* Class that is toggled when icon is selected */
-.icon-selected {
+i.icon-selected {
     color: white;
 }

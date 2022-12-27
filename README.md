@@ -19,7 +19,6 @@ A web app for tracking combat in DnD 5e.
     - Icons
         - Tooltips on condition icons
         - Integreate condition data into save/load functions
-        - Find better icons
     - Drop-down large textbox for notes
     - Make grid layout better
 - Backend

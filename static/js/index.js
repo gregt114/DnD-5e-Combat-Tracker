@@ -18,7 +18,7 @@ function generate_card(character) {
         <input class="name-input" type="text" placeholder="Name" value="${character.name}">
         <label class="AC">AC: <input class="AC-input" type="number" value="${character.AC}"></label>
         <label class="initiative">Initiative: <input class="initiative-input" type="number" value="${character.initiative}"></label>
-        <i class="fa fa-trash"></i>
+        <i class="fa-solid fa-trash-can"></i>
         <label class="curHP">
             HP: <input class="curHP-input" type="number" value="${character.curHP}"> / <input class="maxHP-input" type="number" value="${character.maxHP}">
         </label>
@@ -26,22 +26,22 @@ function generate_card(character) {
             <button>Heal / Damage</button> <input type="number">
         </div>
         <div class="conditions">
-            <i class="fa fa-eye-slash blinded"></i>
+            <i class="fa-solid fa-eye-slash blinded"></i>
             <i class="fa fa-heart charmed"></i>
-            <i class="fa fa-linux dead"></i>
-            <i class="fa fa-bell-slash deafened"></i>
-            <i class="fa fa-warning frightened"></i>
-            <i class="fa fa-crosshairs hunters-mark"></i>
-            <i class="fa fa fa-tripadvisor hex"></i>
-            <i class="fa fa-hand-paper-o grappled"></i>
-            <i class="fa fa-close incapacitated"></i>
-            <i class="fa fa-moon-o invisible"></i>
-            <i class="fa fa-bolt paralyzed"></i>
-            <i class="fa fa-snowflake-o petrified"></i>
-            <i class="fa fa-flask poisoned"></i>
-            <i class="fa fa-lock restrained"></i>
-            <i class="fa fa-star stunned"></i>
-            <i class="fa fa-bed unconscious"></i>
+            <i class="fa-solid fa-skull dead"></i>
+            <i class="fa-solid fa-ear-deaf deafened"></i>
+            <i class="fa-solid fa-triangle-exclamation frightened"></i>
+            <i class="fa-solid fa-crosshairs hunters-mark"></i>
+            <i class="fa-solid fa-wand-sparkles hexed"></i>
+            <i class="fa-solid fa-hand grappled"></i>
+            <i class="fa-solid fa-ban incapacitated"></i>
+            <i class="fa-solid fa-ghost invisible"></i>
+            <i class="fa-solid fa-bolt paralyzed"></i>
+            <i class="fa-regular fa-snowflake petrified"></i>
+            <i class="fa-solid fa-flask poisoned"></i>
+            <i class="fa-solid fa-lock restrained"></i>
+            <i class="fa-solid fa-person-falling-burst stunned"></i>
+            <i class="fa-solid fa-bed"></i>
         </div>
         <label class="notes">Notes: <input class="notes-input" type="text" value="${character.notes}"></label>
     </div>`
@@ -151,7 +151,7 @@ $(document).ready(function () {
     // Creates event handlers dynamically using event delegation
     // Can't do it normal way since icons haven't been created yet
     // TODO: find better solution
-    $(document).on("click", ".fa", function () {
+    $(document).on("click", ".conditions i", function () {
         $(this).toggleClass("icon-selected");
     });
 
