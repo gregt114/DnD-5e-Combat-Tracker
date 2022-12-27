@@ -121,6 +121,31 @@ function get_characters(side) {
 
 }
 
+// Button is jquery reference to button that was clicked
+// operation is either heal or damage
+function heal_damage(button, operation) {
+    // Get value to change HP by
+    let val = $(button).parent().find(".heal-damage-input").val();
+    if (val === "") { return; } // no value, do nothing
+    val = Number(val); // string -> number
+
+    // Find current HP input and its value
+    let hp_input = $(button).parent().parent().find(".curHP-input");
+    let hp_val = Number(hp_input.val());
+
+    if (operation === "heal") {
+        if (hp_val === "") { hp_input.val(val); }
+        else { hp_input.val(hp_val + val); }
+    }
+    else if (operation === "damage") {
+        if (hp_val === "") { hp_input.val(-val); }
+        else { hp_input.val(hp_val - val); }
+    }
+    else {
+        console.log("ERROR: unknown heal-damage operation");
+    }
+}
+
 
 
 // ------------------ Event Handlers ------------------
@@ -152,14 +177,20 @@ $(document).ready(function () {
 
     // Creates event handlers dynamically using event delegation
     // Can't do it normal way since icons haven't been created yet
-    // TODO: find better solution
     $(document).on("click", ".conditions i", function () {
         $(this).toggleClass("icon-selected");
     });
 
-    // Need to do same thing as above but for trash icon
     $(document).on("click", ".fa-trash-can", function () {
         $(this).parent().remove();
+    });
+
+    $(document).on("click", ".heal", function () {
+        heal_damage($(this), "heal");
+    });
+
+    $(document).on("click", ".damage", function () {
+        heal_damage($(this), "damage");
     });
 });
 // -----------------------------------------------------
