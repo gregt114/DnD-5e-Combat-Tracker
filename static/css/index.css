@@ -22,17 +22,85 @@ body {
     gap: 1em;
 }
 
-/* Card data styling */
+input {
+    border: none;
+    background-color: #444;
+    color: #ccc;
+}
+
+input[type="number"] {
+    width: 3em;
+}
+
 .card {
     display: grid;
+    grid-template-areas:
+        "name init trash"
+        "name armr armr"
+        "name hlth hlth"
+        "name damg damg"
+        "cond cond cond"
+        "note note note";
     border: 0.1em solid #0000bb;
     border-radius: 0.25em;
     background-color: #303030;
     margin: 1.5em;
 }
 
-input {
-    border: none;
-    background-color: #444;
+.name-input {
+    grid-area: name;
+    font-size: 2em;
+}
+
+.AC {
+    grid-area: armr;
+}
+
+.initiative {
+    grid-area: init;
+}
+
+.HP {
+    grid-area: hlth;
+}
+
+.heal-damage {
+    grid-area: damg;
+}
+
+.heal-damage input[type="number"] {
+    width: 4em;
+}
+
+.fa-trash-can {
+    grid-area: trash;
+}
+
+.conditions {
+    grid-area: cond;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Condition Icons */
+.conditions i {
+    font-size: 1.25em;
+    color: #444;
+}
+
+.conditions i:hover {
     color: #ccc;
+}
+
+/* Class that is toggled when icon is selected */
+i.icon-selected {
+    color: white;
+}
+
+.notes {
+    grid-area: note;
+}
+
+.notes input {
+    width: 99%;
 }

@@ -19,29 +19,31 @@ function generate_card(character) {
         <label class="initiative">Initiative: <input class="initiative-input" type="number" value="${character.initiative}"></label>
         <i class="fa-solid fa-trash-can"></i>
         <label class="AC">AC: <input class="AC-input" type="number" value="${character.AC}"></label>
-        <label class="curHP">
+        <label class="HP">
             HP: <input class="curHP-input" type="number" value="${character.curHP}"> / <input class="maxHP-input" type="number" value="${character.maxHP}">
         </label>
         <div class="conditions">
             <i class="fa-solid fa-eye-slash blinded"></i>
-            <i class="fa fa-heart charmed"></i>
-            <i class="fa-solid fa-skull dead"></i>
             <i class="fa-solid fa-ear-deaf deafened"></i>
+            <i class="fa-solid fa-hand grappled"></i>
+            <i class="fa-solid fa-lock restrained"></i>
+            <i class="fa fa-heart charmed"></i>
             <i class="fa-solid fa-triangle-exclamation frightened"></i>
             <i class="fa-solid fa-crosshairs hunters-mark"></i>
             <i class="fa-solid fa-wand-sparkles hexed"></i>
-            <i class="fa-solid fa-hand grappled"></i>
-            <i class="fa-solid fa-ban incapacitated"></i>
             <i class="fa-solid fa-ghost invisible"></i>
-            <i class="fa-solid fa-bolt paralyzed"></i>
-            <i class="fa-regular fa-snowflake petrified"></i>
             <i class="fa-solid fa-flask poisoned"></i>
-            <i class="fa-solid fa-lock restrained"></i>
+            <i class="fa-solid fa-bolt paralyzed"></i>
+            <i class="fa-regular fa-snowflake petrified"></i>            
             <i class="fa-solid fa-person-falling-burst stunned"></i>
+            <i class="fa-solid fa-ban incapacitated"></i>
             <i class="fa-solid fa-bed unconscious"></i>
+            <i class="fa-solid fa-skull dead"></i>
         </div>
         <div class="heal-damage">
-            <button>Heal / Damage</button> <input type="number">
+            <button class="heal">Heal</button>
+            <input class="heal-damage-input" type="number">
+            <button class="damage">Damage</button>
         </div>
         <label class="notes">Notes: <input class="notes-input" type="text" value="${character.notes}"></label>
     </div>`
