@@ -16,15 +16,12 @@ function make_character(name, AC, initiative, curHp, maxHp, conditions, notes) {
 function generate_card(character) {
     return `<div class="card">
         <input class="name-input" type="text" placeholder="Name" value="${character.name}">
-        <label class="AC">AC: <input class="AC-input" type="number" value="${character.AC}"></label>
         <label class="initiative">Initiative: <input class="initiative-input" type="number" value="${character.initiative}"></label>
         <i class="fa-solid fa-trash-can"></i>
+        <label class="AC">AC: <input class="AC-input" type="number" value="${character.AC}"></label>
         <label class="curHP">
             HP: <input class="curHP-input" type="number" value="${character.curHP}"> / <input class="maxHP-input" type="number" value="${character.maxHP}">
         </label>
-        <div class="heal-damage">
-            <button>Heal / Damage</button> <input type="number">
-        </div>
         <div class="conditions">
             <i class="fa-solid fa-eye-slash blinded"></i>
             <i class="fa fa-heart charmed"></i>
@@ -41,7 +38,10 @@ function generate_card(character) {
             <i class="fa-solid fa-flask poisoned"></i>
             <i class="fa-solid fa-lock restrained"></i>
             <i class="fa-solid fa-person-falling-burst stunned"></i>
-            <i class="fa-solid fa-bed"></i>
+            <i class="fa-solid fa-bed unconscious"></i>
+        </div>
+        <div class="heal-damage">
+            <button>Heal / Damage</button> <input type="number">
         </div>
         <label class="notes">Notes: <input class="notes-input" type="text" value="${character.notes}"></label>
     </div>`
