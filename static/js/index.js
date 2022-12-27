@@ -131,15 +131,14 @@ function heal_damage(button, operation) {
 
     // Find current HP input and its value
     let hp_input = $(button).parent().parent().find(".curHP-input");
-    let hp_val = Number(hp_input.val());
+    let curHP = Number(hp_input.val());
 
     if (operation === "heal") {
-        if (hp_val === "") { hp_input.val(val); }
-        else { hp_input.val(hp_val + val); }
+        let maxHP = Number(button.parent().parent().find(".maxHP-input").val());
+        hp_input.val(Math.min(curHP + val, maxHP));
     }
     else if (operation === "damage") {
-        if (hp_val === "") { hp_input.val(-val); }
-        else { hp_input.val(hp_val - val); }
+        hp_input.val(curHP - val);
     }
     else {
         console.log("ERROR: unknown heal-damage operation");
