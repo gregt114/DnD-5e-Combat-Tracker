@@ -87,40 +87,55 @@ button.delete {
 }
 
 .blinded:hover,
+.blinded.icon-selected,
 .deafened:hover,
-.restrained:hover,
-.stunned:hover {
+.deafened.icon-selected,
+.stunned:hover,
+.stunned.icon-selected {
     color: white;
 }
 
 .grappled:hover,
+.grappled.icon-selected,
 .restrained:hover,
-.paralyzed:hover {
+.restrained.icon-selected,
+.paralyzed:hover,
+.paralyzed.icon-selected {
     color: yellow;
 }
 
 .charmed:hover,
+.charmed.icon-selected,
 .frightened:hover,
-.incapacitated:hover {
+.frightened.icon-selected,
+.incapacitated:hover,
+.incapacitated.icon-selected {
     color: red;
 }
 
 .hunters-mark:hover,
-.poisoned:hover {
+.hunters-mark.icon-selected,
+.poisoned:hover,
+.poisoned.icon-selected {
     color: greenyellow;
 }
 
 .hexed:hover,
+.hexed.icon-selected,
 .invisible:hover,
-.unconscious:hover {
+.invisible.icon-selected,
+.unconscious:hover,
+.unconscious.icon-selected {
     color: magenta;
 }
 
-.petrified:hover {
+.petrified:hover,
+.petrified.icon-selected {
     color: cyan;
 }
 
-.dead:hover {
+.dead:hover,
+.dead.icon-selected {
     color: black;
 }
 

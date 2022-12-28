@@ -14,6 +14,9 @@ function make_character(name, AC, initiative, curHp, maxHp, conditions, notes) {
 
 // Returns card HTML for a given Character object
 function generate_card(character) {
+    // Makes highlighting the correct conditions cleaner below
+    let activate = (condition) => character["conditions"][condition] ? "icon-selected" : "";
+
     return `<div class="w3-card">
         <div class="w3-container card-header">
             <input class="name-input w3-half" type="text" placeholder="Name" value="${character.name}">
@@ -41,22 +44,22 @@ function generate_card(character) {
         <div>
 
         <div class="w3-container w3-center w3-hide conditions">
-            <i class="fa-solid fa-eye-slash blinded"></i>
-            <i class="fa-solid fa-ear-deaf deafened"></i>
-            <i class="fa-solid fa-hand grappled"></i>
-            <i class="fa-solid fa-lock restrained"></i>
-            <i class="fa fa-heart charmed"></i>
-            <i class="fa-solid fa-triangle-exclamation frightened"></i>
-            <i class="fa-solid fa-crosshairs hunters-mark"></i>
-            <i class="fa-solid fa-wand-sparkles hexed"></i>
-            <i class="fa-solid fa-ghost invisible"></i>
-            <i class="fa-solid fa-flask poisoned"></i>
-            <i class="fa-solid fa-bolt paralyzed"></i>
-            <i class="fa-regular fa-snowflake petrified"></i>            
-            <i class="fa-solid fa-person-falling-burst stunned"></i>
-            <i class="fa-solid fa-ban incapacitated"></i>
-            <i class="fa-solid fa-bed unconscious"></i>
-            <i class="fa-solid fa-skull dead"></i>
+            <i class="fa-solid fa-eye-slash blinded ${activate('blinded')}"></i>
+            <i class="fa-solid fa-ear-deaf deafened ${activate('deafened')}"></i>
+            <i class="fa-solid fa-hand grappled ${activate('grappled')}"></i>
+            <i class="fa-solid fa-lock restrained ${activate('restrained')}"></i>
+            <i class="fa fa-heart charmed ${activate('charmed')}"></i>
+            <i class="fa-solid fa-triangle-exclamation frightened ${activate('frightened')}"></i>
+            <i class="fa-solid fa-crosshairs hunters-mark ${activate('hunters-mark')}"></i>
+            <i class="fa-solid fa-wand-sparkles hexed ${activate('hexed')}"></i>
+            <i class="fa-solid fa-ghost invisible ${activate('invisible')}"></i>
+            <i class="fa-solid fa-flask poisoned ${activate('poisoned')}"></i>
+            <i class="fa-solid fa-bolt paralyzed ${activate('paralyzed')}"></i>
+            <i class="fa-regular fa-snowflake petrified ${activate('petrified')}"></i>            
+            <i class="fa-solid fa-person-falling-burst stunned ${activate('stunned')}"></i>
+            <i class="fa-solid fa-ban incapacitated ${activate('incapacitated')}"></i>
+            <i class="fa-solid fa-bed unconscious ${activate('unconscious')}"></i>
+            <i class="fa-solid fa-skull dead ${activate('dead')}"></i>
         </div>
 
         <div class="w3-container w3-hide notes">
@@ -115,9 +118,29 @@ function load_side(side) {
     reader.readAsText(file);
 }
 
+// Parses card to determine which conditions it has
+// card: JQuery object representing the card
+function get_conditions(card) {
+    let conditions = {};
+    $(".conditions i").each(function () {
+
+        // Get list of class names and if icon is activated
+        let class_names = $(this).attr("class").split(" ");
+        let activated = class_names.includes("icon-selected");
+
+        // Filter out FontAwesome classes to get condition name
+        let condition_name = class_names.filter(name => {
+            return !(name === "fa") && !name.includes("fa-");
+        })[0]; // there should only be 1 non-FontAwesome class
+
+        conditions[condition_name] = activated;
+    });
+
+    return conditions;
+}
+
 
 // Returns list of Character objects on the given side(left or right)
-// TODO: add conditions
 function get_characters(side) {
     let cards = $("#" + side).find(".w3-card");
     let characters = [];
@@ -129,9 +152,10 @@ function get_characters(side) {
         let initiative = Number(card.find(".initiative-input").val());
         let curHP = Number(card.find(".curHP-input").val());
         let maxHP = Number(card.find(".maxHP-input").val());
+        let conditions = get_conditions(card);
         let notes = card.find(".notes-input").val();
 
-        let c = make_character(name, AC, initiative, curHP, maxHP, {}, notes);
+        let c = make_character(name, AC, initiative, curHP, maxHP, conditions, notes);
         characters.push(c);
     });
     return characters;
@@ -197,7 +221,7 @@ $(document).ready(function () {
         $(this).toggleClass("icon-selected");
     });
 
-    $(document).on("click", ".delete", function () { //todo fix with new style
+    $(document).on("click", ".delete", function () {
         $(this).parent().parent().remove();
     });
 
