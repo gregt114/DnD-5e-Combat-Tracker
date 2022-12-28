@@ -60,7 +60,7 @@ function generate_card(character) {
         </div>
 
         <div class="w3-container w3-hide notes">
-           <textarea class="notes-input w3-left" placeholder="Enter notes here..." value="${character.notes}"></textarea>
+           <textarea class="notes-input w3-left" placeholder="Enter notes here...">${character.notes}</textarea>
         </div>
     
     </div>`
@@ -119,7 +119,7 @@ function load_side(side) {
 // Returns list of Character objects on the given side(left or right)
 // TODO: add conditions
 function get_characters(side) {
-    let cards = $("#" + side).find(".card");
+    let cards = $("#" + side).find(".w3-card");
     let characters = [];
 
     cards.each(function () {
@@ -197,8 +197,8 @@ $(document).ready(function () {
         $(this).toggleClass("icon-selected");
     });
 
-    $(document).on("click", ".fa-trash-can", function () { //todo fix with new style
-        $(this).parent().remove();
+    $(document).on("click", ".delete", function () { //todo fix with new style
+        $(this).parent().parent().remove();
     });
 
     $(document).on("click", ".heal", function () {
