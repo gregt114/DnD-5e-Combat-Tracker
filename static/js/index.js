@@ -14,15 +14,33 @@ function make_character(name, AC, initiative, curHp, maxHp, conditions, notes) {
 
 // Returns card HTML for a given Character object
 function generate_card(character) {
-    return `<div class="card">
-        <input class="name-input" type="text" placeholder="Name" value="${character.name}">
-        <label class="initiative">Initiative: <input class="initiative-input" type="number" value="${character.initiative}"></label>
-        <i class="fa-solid fa-trash-can"></i>
-        <label class="AC">AC: <input class="AC-input" type="number" value="${character.AC}"></label>
-        <label class="HP">
-            HP: <input class="curHP-input" type="number" value="${character.curHP}"> / <input class="maxHP-input" type="number" value="${character.maxHP}">
-        </label>
-        <div class="conditions">
+    return `<div class="w3-card">
+        <div class="w3-container card-header">
+            <input class="name-input w3-half" type="text" placeholder="Name" value="${character.name}">
+            <div class="w3-container w3-half stats">
+                <label class="AC">AC: <input class="AC-input" type="text" value="${character.AC}"></label>
+                <label class="initiative w3-right">Initiative: <input class="initiative-input" type="text" value="${character.initiative}"></label>
+                <br>
+                <label class="HP">
+                    HP: <input class="curHP-input" type="text" value="${character.curHP}"> / <input class="maxHP-input" type="text" value="${character.maxHP}">
+                </label>
+                <div class="heal-damage w3-center">
+                    <button class="w3-button heal">Heal</button>
+                    <input class="heal-damage-input" type="text">
+                    <button class="w3-button damage">Damage</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-container card-footer">
+            <button class="w3-button w3-left show-conditions">Conditions</button>
+            <button class="w3-button w3-center show-notes">Notes</button>
+            <button class="w3-button w3-right delete">
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+        <div>
+
+        <div class="w3-container w3-center w3-hide conditions">
             <i class="fa-solid fa-eye-slash blinded"></i>
             <i class="fa-solid fa-ear-deaf deafened"></i>
             <i class="fa-solid fa-hand grappled"></i>
@@ -40,12 +58,11 @@ function generate_card(character) {
             <i class="fa-solid fa-bed unconscious"></i>
             <i class="fa-solid fa-skull dead"></i>
         </div>
-        <div class="heal-damage">
-            <button class="heal">Heal</button>
-            <input class="heal-damage-input" type="number">
-            <button class="damage">Damage</button>
+
+        <div class="w3-container w3-hide notes">
+           <textarea class="notes-input w3-left" placeholder="Enter notes here..." value="${character.notes}"></textarea>
         </div>
-        <label class="notes">Notes: <input class="notes-input" type="text" value="${character.notes}"></label>
+    
     </div>`
 }
 
@@ -180,7 +197,7 @@ $(document).ready(function () {
         $(this).toggleClass("icon-selected");
     });
 
-    $(document).on("click", ".fa-trash-can", function () {
+    $(document).on("click", ".fa-trash-can", function () { //todo fix with new style
         $(this).parent().remove();
     });
 
@@ -190,6 +207,18 @@ $(document).ready(function () {
 
     $(document).on("click", ".damage", function () {
         heal_damage($(this), "damage");
+    });
+
+    $(document).on("click", "button.show-notes", function () {
+        let notes = $(this).parent().find(".notes");
+        notes.toggleClass("w3-hide");
+        notes.toggleClass("w3-show");
+    });
+
+    $(document).on("click", "button.show-conditions", function () {
+        let notes = $(this).parent().find(".conditions");
+        notes.toggleClass("w3-hide");
+        notes.toggleClass("w3-show");
     });
 });
 // -----------------------------------------------------
