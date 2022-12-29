@@ -139,6 +139,18 @@ button.delete {
     color: black;
 }
 
+/* Icon tooltips */
+span.w3-text.w3-tag {
+    position: absolute;
+    left: 0;
+    bottom: 1.75em;
+    background-color: white;
+    border-radius: 0.5em;
+
+    font: 0.75em Arial, sans-serif;
+    color: black;
+}
+
 .notes {
     padding: 0em;
 }

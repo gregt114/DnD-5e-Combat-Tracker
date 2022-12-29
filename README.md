@@ -16,8 +16,6 @@ A web app for tracking combat in DnD 5e.
 ## TODO
 
 - Frontend
-    - Icons
-        - Tooltips on condition icons
     - Add styling to add/save/load buttons
     - When dead condition is acticated, add larger visual indication on card
 - Backend

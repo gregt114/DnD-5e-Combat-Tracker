@@ -44,22 +44,22 @@ function generate_card(character) {
         <div>
 
         <div class="w3-container w3-center w3-hide conditions">
-            <i class="fa-solid fa-eye-slash blinded ${activate('blinded')}"></i>
-            <i class="fa-solid fa-ear-deaf deafened ${activate('deafened')}"></i>
-            <i class="fa-solid fa-hand grappled ${activate('grappled')}"></i>
-            <i class="fa-solid fa-lock restrained ${activate('restrained')}"></i>
-            <i class="fa fa-heart charmed ${activate('charmed')}"></i>
-            <i class="fa-solid fa-triangle-exclamation frightened ${activate('frightened')}"></i>
-            <i class="fa-solid fa-crosshairs hunters-mark ${activate('hunters-mark')}"></i>
-            <i class="fa-solid fa-wand-sparkles hexed ${activate('hexed')}"></i>
-            <i class="fa-solid fa-ghost invisible ${activate('invisible')}"></i>
-            <i class="fa-solid fa-flask poisoned ${activate('poisoned')}"></i>
-            <i class="fa-solid fa-bolt paralyzed ${activate('paralyzed')}"></i>
-            <i class="fa-regular fa-snowflake petrified ${activate('petrified')}"></i>            
-            <i class="fa-solid fa-person-falling-burst stunned ${activate('stunned')}"></i>
-            <i class="fa-solid fa-ban incapacitated ${activate('incapacitated')}"></i>
-            <i class="fa-solid fa-bed unconscious ${activate('unconscious')}"></i>
-            <i class="fa-solid fa-skull dead ${activate('dead')}"></i>
+            <i class="fa-solid fa-eye-slash blinded w3-tooltip ${activate('blinded')}"><span class="w3-text w3-tag">Blinded</span></i>
+            <i class="fa-solid fa-ear-deaf deafened w3-tooltip ${activate('deafened')}"><span class="w3-text w3-tag">Deafened</span></i>
+            <i class="fa-solid fa-hand grappled w3-tooltip ${activate('grappled')}"><span class="w3-text w3-tag">Grappled</span></i>
+            <i class="fa-solid fa-lock restrained w3-tooltip ${activate('restrained')}"><span class="w3-text w3-tag">Restrained</span></i>
+            <i class="fa fa-heart charmed w3-tooltip ${activate('charmed')}"><span class="w3-text w3-tag">Charmed</span></i>
+            <i class="fa-solid fa-triangle-exclamation frightened w3-tooltip ${activate('frightened')}"><span class="w3-text w3-tag">Frightened</span></i>
+            <i class="fa-solid fa-crosshairs hunters-mark w3-tooltip ${activate('hunters-mark')}"><span class="w3-text w3-tag">Hunter's Mark</span></i>
+            <i class="fa-solid fa-wand-sparkles hexed w3-tooltip ${activate('hexed')}"><span class="w3-text w3-tag">Hex</span></i>
+            <i class="fa-solid fa-ghost invisible w3-tooltip ${activate('invisible')}"><span class="w3-text w3-tag">Invisible</span></i>
+            <i class="fa-solid fa-flask poisoned w3-tooltip ${activate('poisoned')}"><span class="w3-text w3-tag">Poisoned</span></i>
+            <i class="fa-solid fa-bolt paralyzed w3-tooltip ${activate('paralyzed')}"><span class="w3-text w3-tag">Paralyzed</span></i>
+            <i class="fa-regular fa-snowflake petrified w3-tooltip ${activate('petrified')}"><span class="w3-text w3-tag">Petrified</span></i>
+            <i class="fa-solid fa-person-falling-burst stunned w3-tooltip ${activate('stunned')}"><span class="w3-text w3-tag">Stunned</span></i>
+            <i class="fa-solid fa-ban incapacitated w3-tooltip ${activate('incapacitated')}"><span class="w3-text w3-tag">Incapacitated</span></i>
+            <i class="fa-solid fa-bed unconscious w3-tooltip ${activate('unconscious')}"><span class="w3-text w3-tag">Unconscious</span></i>
+            <i class="fa-solid fa-skull dead w3-tooltip ${activate('dead')}"><span class="w3-text w3-tag">Dead</span></i>
         </div>
 
         <div class="w3-container w3-hide notes">
