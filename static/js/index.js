@@ -12,12 +12,19 @@ function make_character(name, AC, initiative, curHp, maxHp, conditions, notes) {
     }
 }
 
+// Returns empty character
+function empty_character() {
+    return make_character("", 0, 0, 0, 0, {}, "");
+}
+
 // Returns card HTML for a given Character object
 function generate_card(character) {
     // Makes highlighting the correct conditions cleaner below
     let activate = (condition) => character["conditions"][condition] ? "icon-selected" : "";
+    // Adds dark overlay on dead characters
+    let dampen = "dead" in character.conditions ? (character.conditions.dead ? "dampen" : "") : "";
 
-    return `<div class="w3-card">
+    return `<div class="w3-card ${dampen}">
         <div class="w3-container card-header">
             <input class="name-input w3-half" type="text" placeholder="Name" value="${character.name}">
             <div class="w3-container w3-half stats">
@@ -69,11 +76,12 @@ function generate_card(character) {
     </div>`
 }
 
-// Returns card HTML for an empty card
-function generate_empty_card() {
-    return generate_card(make_character("", 0, 0, 0, 0, {}, ""));
+// Add card for character on given side (left or right)
+function add_card(side, character) {
+    let html = generate_card(character);
+    let div = $(`#${side} div.card-area`); // select div element to add card to
+    div.append(html);
 }
-
 
 // Save data for the given side(left or right) to a JSON file
 function save_side(side) {
@@ -110,7 +118,7 @@ function load_side(side) {
         let characters = JSON.parse(this.result);
         // For each character, add card to the appropriate side
         characters.forEach(c => {
-            $("#" + side).append(generate_card(c));
+            add_card(side, c);
         });
     });
 
@@ -122,7 +130,7 @@ function load_side(side) {
 // card: JQuery object representing the card
 function get_conditions(card) {
     let conditions = {};
-    $(".conditions i").each(function () {
+    card.find(".conditions i").each(function () {
 
         // Get list of class names and if icon is activated
         let class_names = $(this).attr("class").split(" ");
@@ -199,14 +207,14 @@ $(document).ready(function () {
     });
 
     $("#party-add").click(() => {
-        $("#left div.card-area").append(generate_empty_card());
+        add_card("left", empty_character());
     });
 
     $("#enemy-add").click(() => {
-        $("#right div.card-area").append(generate_empty_card());
+        add_card("right", empty_character());
     });
 
-    $("#party-load").change(() => { // TODO - fix load to use new div elements - create add function
+    $("#party-load").change(() => {
         load_side("left");
     });
 
@@ -219,6 +227,10 @@ $(document).ready(function () {
     // Can't do it normal way since icons haven't been created yet
     $(document).on("click", ".conditions i", function () {
         $(this).toggleClass("icon-selected");
+        // Add dark overlay when dead attribute is selected
+        if ($(this).attr("class").includes("dead")) {
+            $(this).closest(".w3-card").toggleClass("dampen");
+        }
     });
 
     $(document).on("click", ".delete", function () {

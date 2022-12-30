@@ -14,10 +14,6 @@ h1 {
     margin-top: 0.5em;
 }
 
-.card-area {
-    margin-top: 5em;
-}
-
 /* 2 column setup */
 .grid-container {
     display: grid;
@@ -36,10 +32,27 @@ h1 {
     gap: 1em;
 }
 
+.card-area {
+    margin-top: 5em;
+}
+
 .w3-card {
     margin: 1em 1.5em;
-    border: 0.2em solid blue;
     background-color: #323848;
+}
+
+/* When card is labeled as dead */
+.dampen {
+    filter: brightness(50%);
+}
+
+
+#left .w3-card {
+    border: 0.2em solid #0f0;
+}
+
+#right .w3-card {
+    border: 0.2em solid #f00;
 }
 
 .card-header {
