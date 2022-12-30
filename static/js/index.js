@@ -242,6 +242,14 @@ $(document).ready(function () {
         load_side("right");
     });
 
+    $("#party-sort").click(function () {
+        sort("left");
+    });
+
+    $("#enemy-sort").click(function () {
+        sort("right");
+    });
+
     // Auto-roll button for enemy initiatives
     $("#enemy-roll").click(() => {
         $("#right .w3-card").each(function () {

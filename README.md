@@ -17,8 +17,6 @@ A web app for tracking combat in DnD 5e.
 
 - Frontend
     - Add turn / round tracker
-    - Add initiative auto rolling for enemies
-    - Add button to sort cards by initiative
 - Backend
     - SQLlite + db setup
 - Deployment
