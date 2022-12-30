@@ -18,21 +18,29 @@
 
 <body>
 
-    <h1>DnD 5e Combat Tracker v2</h1>
+    <h1 class="w3-center">
+        <b>
+            <i class="fa-solid fa-dice-d20"></i>
+            DnD 5e Combat Tracker
+            <i class="fa-solid fa-dice-d20"></i>
+        </b>
+    </h1>
 
     <div class="grid-container">
         <div id="left">
-            Upload: <input id="party-load" type="file" accept=".json">
-            <br><br>
-            <button id="party-save">Save Party</button>
-            <button id="party-add">Add Party Member</button>
+            Upload Previous Encounter: <input id="party-load" class="w3-input" type="file" accept=".json">
+            <button id="party-save" class="w3-button w3-left top-button">Save Party <i
+                    class="fa-solid fa-download"></i></button>
+            <button id="party-add" class="w3-button w3-right top-button">Add Member <i class="fa fa-plus"></i></button>
+            <div class="card-area"></div>
         </div>
 
         <div id="right">
-            Upload: <input id="enemy-load" type="file" accept=".json">
-            <br><br>
-            <button id="enemy-save">Save Enemies</button>
-            <button id="enemy-add">Add Enemy</button>
+            Upload Previous Encounter: <input id="enemy-load" class="w3-input" type="file" accept=".json">
+            <button id="enemy-add" class="w3-button w3-left top-button">Add Enemy <i class="fa fa-plus"></i></button>
+            <button id="enemy-save" class="w3-button w3-right top-button">Save Enemies <i
+                    class="fa-solid fa-download"></i></button>
+            <div class="card-area"></div>
         </div>
     </div>
 

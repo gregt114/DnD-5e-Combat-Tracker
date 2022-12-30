@@ -199,14 +199,14 @@ $(document).ready(function () {
     });
 
     $("#party-add").click(() => {
-        $("#left").append(generate_empty_card());
+        $("#left div.card-area").append(generate_empty_card());
     });
 
     $("#enemy-add").click(() => {
-        $("#right").append(generate_empty_card());
+        $("#right div.card-area").append(generate_empty_card());
     });
 
-    $("#party-load").change(() => {
+    $("#party-load").change(() => { // TODO - fix load to use new div elements - create add function
         load_side("left");
     });
 
