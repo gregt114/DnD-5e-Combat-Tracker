@@ -1,4 +1,9 @@
 
+// Returns random integer in range [min, max]
+function rand_int(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 // Returns character object with given data
 function make_character(name, AC, initiative, curHp, maxHp, conditions, notes) {
     return {
@@ -126,6 +131,21 @@ function load_side(side) {
     reader.readAsText(file);
 }
 
+// Sorts side(left or right) by initiative
+function sort(side) {
+
+    // Get characters on this side and sort them by decreasing initiative
+    let characters = get_characters(side);
+    characters.sort((a, b) => b.initiative - a.initiative);
+
+    // Remove all cards on the side and put them back in right order
+    let card_area = $("#" + side + " .card-area");
+    card_area.empty();
+    characters.forEach(c => {
+        add_card(side, c);
+    })
+}
+
 // Parses card to determine which conditions it has
 // card: JQuery object representing the card
 function get_conditions(card) {
@@ -220,6 +240,14 @@ $(document).ready(function () {
 
     $("#enemy-load").change(() => {
         load_side("right");
+    });
+
+    // Auto-roll button for enemy initiatives
+    $("#enemy-roll").click(() => {
+        $("#right .w3-card").each(function () {
+            let card = $(this);
+            card.find(".initiative-input").val(rand_int(1, 20));
+        });
     });
 
 
