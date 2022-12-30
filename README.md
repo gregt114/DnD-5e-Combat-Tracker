@@ -1,4 +1,4 @@
-# Combat-Tracker_v2
+# DnD-5e-Combat-Tracker
 
 A web app for tracking combat in DnD 5e.
 
