@@ -16,8 +16,7 @@ A web app for tracking combat in DnD 5e.
 ## TODO
 
 - Frontend
-    - When dead condition is acticated, add larger visual indication on card
-    - Find better border outline color for cards
+    - Add turn / round tracker
 - Backend
     - SQLlite + db setup
 - Deployment
