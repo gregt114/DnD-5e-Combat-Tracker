@@ -17,6 +17,8 @@ A web app for tracking combat in DnD 5e.
 
 - Frontend
     - Add turn / round tracker
+    - Make how-to-use page
+    - Make character saver page
 - Backend
     - SQLlite + db setup
 - Deployment

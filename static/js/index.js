@@ -187,7 +187,13 @@ function get_characters(side) {
         characters.push(c);
     });
     return characters;
+}
 
+// Returns list of all character objects, sorted by initiative
+function get_all_characters() {
+    let characters = get_characters("left").concat(get_characters("right"));
+    characters.sort((a, b) => b.initiative - a.initiative);
+    return characters;
 }
 
 // Button is jquery reference to button that was clicked
