@@ -249,11 +249,37 @@ $(document).ready(function () {
         notes.toggleClass("w3-show");
     });
 
-    // FOR DEBUGGING
+    // Turn system
+    // TODO: add styling on current card
     $("#next-turn").click(() => {
-        let cs = get_characters("left");
-        console.log(cs);
-        console.log(cs.map(x => x.to_JSON()));
+        let round = $("#round");
+        let round_num = Number(round.val());
+        let turn = $("#turn");
+        let turn_num = Number(turn.val());
+
+        // Start combat
+        if (round_num === 0 && turn_num === 0) {
+            // Store characters in sorted order in circular linked list(CHARACTERS)
+            let character_list = get_all_characters();
+            character_list.sort((a, b) => b.initiative - a.initiative);
+            CHARACTERS.empty(); // Clear list before adding
+            character_list.forEach(c => {
+                CHARACTERS.add(c);
+            });
+            round.val(1);
+            turn.val(1);
+        } // Made one full rotation, reset counters
+        else if (CHARACTERS.peek() === CHARACTERS.getHead()) {
+            round.val(round_num + 1);
+            turn.val(1);
+            CHARACTERS.next();
+        } // Mid-round
+        else {
+            turn.val(turn_num + 1);
+            CHARACTERS.next();
+        }
+
+        console.log(CHARACTERS.get());
     });
 });
 // -----------------------------------------------------

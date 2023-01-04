@@ -44,6 +44,14 @@ export class LinkedList {
         return this.current === null ? null : this.current.value;
     }
 
+    getHead() {
+        return this.head === null ? null : this.head.value;
+    }
+
+    getTail() {
+        return this === null ? null : this.tail.value;;
+    }
+
     peek() {
         if (this.current === null) { return null; }
         return this.current.after.value;

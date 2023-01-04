@@ -19,6 +19,7 @@ A web app for tracking combat in DnD 5e.
     - Add turn / round tracker
     - Make how-to-use page
     - Make character saver page
+    - Potential Bug: ID reuse. maybe use hash combo of name and timestamp?
 - Backend
     - SQLlite + db setup
 - Deployment
