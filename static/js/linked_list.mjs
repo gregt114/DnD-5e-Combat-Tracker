@@ -1,118 +1,82 @@
-
-function Node(value, before, after) {
-    return {
-        "value": value,
-        "before": before,
-        "after": after,
-    };
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
 }
 
-// Class representing circular doubly linked list
-export class LinkedList {
+export class DoublyLinkedCircularListTurn {
     constructor() {
         this.head = null;
-        this.tail = null;
-        this.current = null;
         this.length = 0;
+        this.current = null;
     }
 
-    isEmpty() {
-        return this.length === 0;
-    }
-
+    // Insert a new node at the end of the list
     add(value) {
-        let node = Node(value, null, null);
-        if (this.head === null && this.tail === null) {
-            this.head = node;
-            this.tail = node;
-            this.current = node;
-            // Make circular
-            node.after = node;
-            node.before = node;
-            this.length += 1;
+        const newNode = new Node(value);
+        if (!this.head) {
+            this.head = newNode;
+            this.current = newNode;
+            newNode.next = newNode;
+            newNode.prev = newNode;
+        } else {
+            const tail = this.head.prev;
+            tail.next = newNode;
+            newNode.prev = tail;
+            newNode.next = this.head;
+            this.head.prev = newNode;
         }
-        else {
-            this.tail.after = node;
-            node.before = this.tail;
-            node.after = this.head; // keep circular
-            this.tail = node;
-            this.length += 1;
+        this.length += 1;
+    }
+
+    // Remove the node at the specified index
+    remove(func) {
+        if (!this.head) return;
+        let cur = this.head;
+        for (let i = 0; i < this.length; i++) {
+
+            if (func(cur.value)) {
+                if (cur === this.head) {
+                    this.head = cur.next;
+                }
+                if (cur === this.current) {
+                    this.current = cur.next;
+                }
+                cur.prev.next = cur.next;
+                cur.next.prev = cur.prev;
+                this.length -= 1;
+            }
+            cur = cur.next;
         }
     }
 
     get() {
-        return this.current === null ? null : this.current.value;
+        return this.current.value;
     }
 
     getHead() {
-        return this.head === null ? null : this.head.value;
-    }
-
-    getTail() {
-        return this === null ? null : this.tail.value;;
-    }
-
-    peek() {
-        if (this.current === null) { return null; }
-        return this.current.after.value;
+        return this.head.value;
     }
 
     next() {
-        if (this.current === null) {
-            return null;
-        }
-        let next_node = this.current.after;
-        this.current = next_node;
+        if (this.current === null) { return null; }
+        this.current = this.current.next;
     }
 
-    // Deletes all elements
+    peek() {
+        if (this.current === null || this.current.next === null) {
+            return null;
+        }
+        return this.current.next.value;
+    }
+
     empty() {
         this.head = null;
-        this.tail = null;
         this.current = null;
         this.length = 0;
     }
 
-    // func is boolean function
-    remove(func) {
-        // Size 0 or 1 array
-        if (this.length === 0) {
-            return;
-        }
-        else if (this.length === 1 && func(this.get())) {
-            this.empty();
-            return;
-        }
-
-        let cur = this.head;
-        for (let i = 0; i < this.length; i++) {
-            if (cur === null) {
-                return;
-            }
-            if (func(cur.value)) {
-                // Removing current node -> advance current pointer
-                if (cur === this.current) {
-                    this.next();
-                }
-                // Special case of removing head
-                if (cur === this.head) {
-                    this.head = this.head.after;
-                    this.head.before = this.tail;
-                    this.tail.after = this.head;
-                } // Special case of removing tail
-                else if (cur === this.tail) {
-                    this.tail = this.tail.before;
-                    this.tail.after = this.head;
-                    this.head.before = this.tail;
-                }
-                else {
-                    cur.before.after = cur.after;
-                    cur.after.before = cur.before;
-                }
-                this.length -= 1;
-            }
-            cur = cur.after;
-        }
-    }
 
 }

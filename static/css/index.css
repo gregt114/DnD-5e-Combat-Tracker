@@ -66,6 +66,11 @@ h1 {
     border: 0.2em solid #f00;
 }
 
+.my-turn {
+    border: 0.3em solid cyan !important;
+    background-color: #202329;
+}
+
 .card-header {
     padding: 0em;
 }

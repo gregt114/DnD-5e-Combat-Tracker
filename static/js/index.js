@@ -1,4 +1,4 @@
-import { LinkedList } from "./linked_list.mjs";
+import { DoublyLinkedCircularList as LinkedList } from "./linked_list.mjs";
 import { Character } from "./character.mjs"
 
 // Global variables
@@ -34,7 +34,7 @@ function get_characters(side) {
         let maxHP = Number(card.find(".maxHP-input").val());
         let conditions = get_conditions(card);
         let notes = card.find(".notes-input").val();
-        let id = Number(card.id);
+        let id = Number(card.attr("id"));
 
         let c = new Character(name, AC, initiative, curHP, maxHP, conditions, notes, id);
         characters.push(c);
@@ -55,9 +55,6 @@ function add_card(side, character) {
     let html = character.generate_card_html();
     let div = $(`#${side} div.card-area`); // select div element to add card to
     div.append(html);
-
-    // Add reference to card to character object
-    character.card = $("#" + character.id);
 
     // Add character to global list
     CHARACTERS.add(character);
@@ -225,7 +222,7 @@ $(document).ready(function () {
 
     $(document).on("click", ".delete", function () {
         let card = $(this).parent().parent();
-        CHARACTERS.remove(x => x.id === Number(card.id));
+        //CHARACTERS.remove(x => x.id === Number(card.id)); TODO remove
         card.remove();
     });
 
@@ -257,19 +254,22 @@ $(document).ready(function () {
         let turn = $("#turn");
         let turn_num = Number(turn.val());
 
+        // If something already has my-turn class, disable class
+        $(".my-turn").toggleClass("my-turn");
+
+
         // Start combat
         if (round_num === 0 && turn_num === 0) {
             // Store characters in sorted order in circular linked list(CHARACTERS)
-            let character_list = get_all_characters();
-            character_list.sort((a, b) => b.initiative - a.initiative);
-            CHARACTERS.empty(); // Clear list before adding
-            character_list.forEach(c => {
-                CHARACTERS.add(c);
-            });
+            // let character_list = get_all_characters();
+            // CHARACTERS.empty(); // Clear list before adding
+            // character_list.forEach(c => {
+            //     CHARACTERS.add(c);
+            // });
             round.val(1);
             turn.val(1);
         } // Made one full rotation, reset counters
-        else if (CHARACTERS.peek() === CHARACTERS.getHead()) {
+        else if (CHARACTERS.peek().id === CHARACTERS.getHead().id) {
             round.val(round_num + 1);
             turn.val(1);
             CHARACTERS.next();
@@ -279,7 +279,7 @@ $(document).ready(function () {
             CHARACTERS.next();
         }
 
-        console.log(CHARACTERS.get());
+        $("#" + CHARACTERS.get().id).toggleClass("my-turn");
     });
 });
 // -----------------------------------------------------
