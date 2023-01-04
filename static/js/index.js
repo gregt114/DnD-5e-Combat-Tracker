@@ -1,91 +1,66 @@
+import { LinkedList } from "./linked_list.mjs";
+import { Character } from "./character.mjs"
+
+// Global variables
+let CUR_ID = 0;
+let CHARACTERS = new LinkedList();
+// ---------------
 
 // Returns random integer in range [min, max]
 function rand_int(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Returns character object with given data
-function make_character(name, AC, initiative, curHp, maxHp, conditions, notes) {
-    return {
-        "name": name,               // string
-        "curHP": curHp,             // number
-        "maxHP": maxHp,             // number
-        "AC": AC,                   // number
-        "initiative": initiative,   // number
-        "conditions": conditions,   // {key1: bool, key2: bool, ...}
-        "notes": notes              // string
-    }
-}
 
 // Returns empty character
 function empty_character() {
-    return make_character("", 0, 0, 0, 0, {}, "");
+    let c = new Character("", 0, 0, 0, 0, {}, "", CUR_ID);
+    CUR_ID += 1;
+    return c;
 }
 
-// Returns card HTML for a given Character object
-function generate_card(character) {
-    // Makes highlighting the correct conditions cleaner below
-    let activate = (condition) => character["conditions"][condition] ? "icon-selected" : "";
-    // Adds dark overlay on dead characters
-    let dampen = "dead" in character.conditions ? (character.conditions.dead ? "dampen" : "") : "";
 
-    return `<div class="w3-card ${dampen}">
-        <div class="w3-container card-header">
-            <input class="name-input w3-half" type="text" placeholder="Name" value="${character.name}">
-            <div class="w3-container w3-half stats">
-                <label class="AC">AC: <input class="AC-input" type="text" value="${character.AC}"></label>
-                <label class="initiative w3-right">Initiative: <input class="initiative-input" type="text" value="${character.initiative}"></label>
-                <br>
-                <label class="HP">
-                    HP: <input class="curHP-input" type="text" value="${character.curHP}"> / <input class="maxHP-input" type="text" value="${character.maxHP}">
-                </label>
-                <div class="heal-damage w3-center">
-                    <button class="w3-button heal">Heal</button>
-                    <input class="heal-damage-input" type="text">
-                    <button class="w3-button damage">Damage</button>
-                </div>
-            </div>
-        </div>
+// Returns list of Character objects on the given side(left or right)
+function get_characters(side) {
+    let cards = $("#" + side).find(".w3-card");
+    let characters = [];
 
-        <div class="w3-container card-footer">
-            <button class="w3-button w3-left show-conditions">Conditions</button>
-            <button class="w3-button w3-center show-notes">Notes</button>
-            <button class="w3-button w3-right delete">
-                <i class="fa-solid fa-trash-can"></i>
-            </button>
-        <div>
+    cards.each(function () {
+        let card = $(this);
+        let name = card.find(".name-input").val();
+        let AC = Number(card.find(".AC-input").val());
+        let initiative = Number(card.find(".initiative-input").val());
+        let curHP = Number(card.find(".curHP-input").val());
+        let maxHP = Number(card.find(".maxHP-input").val());
+        let conditions = get_conditions(card);
+        let notes = card.find(".notes-input").val();
+        let id = Number(card.id);
 
-        <div class="w3-container w3-center w3-hide conditions">
-            <i class="fa-solid fa-eye-slash blinded w3-tooltip ${activate('blinded')}"><span class="w3-text w3-tag">Blinded</span></i>
-            <i class="fa-solid fa-ear-deaf deafened w3-tooltip ${activate('deafened')}"><span class="w3-text w3-tag">Deafened</span></i>
-            <i class="fa-solid fa-hand grappled w3-tooltip ${activate('grappled')}"><span class="w3-text w3-tag">Grappled</span></i>
-            <i class="fa-solid fa-lock restrained w3-tooltip ${activate('restrained')}"><span class="w3-text w3-tag">Restrained</span></i>
-            <i class="fa fa-heart charmed w3-tooltip ${activate('charmed')}"><span class="w3-text w3-tag">Charmed</span></i>
-            <i class="fa-solid fa-triangle-exclamation frightened w3-tooltip ${activate('frightened')}"><span class="w3-text w3-tag">Frightened</span></i>
-            <i class="fa-solid fa-crosshairs hunters-mark w3-tooltip ${activate('hunters-mark')}"><span class="w3-text w3-tag">Hunter's Mark</span></i>
-            <i class="fa-solid fa-wand-sparkles hexed w3-tooltip ${activate('hexed')}"><span class="w3-text w3-tag">Hex</span></i>
-            <i class="fa-solid fa-ghost invisible w3-tooltip ${activate('invisible')}"><span class="w3-text w3-tag">Invisible</span></i>
-            <i class="fa-solid fa-flask poisoned w3-tooltip ${activate('poisoned')}"><span class="w3-text w3-tag">Poisoned</span></i>
-            <i class="fa-solid fa-bolt paralyzed w3-tooltip ${activate('paralyzed')}"><span class="w3-text w3-tag">Paralyzed</span></i>
-            <i class="fa-regular fa-snowflake petrified w3-tooltip ${activate('petrified')}"><span class="w3-text w3-tag">Petrified</span></i>
-            <i class="fa-solid fa-person-falling-burst stunned w3-tooltip ${activate('stunned')}"><span class="w3-text w3-tag">Stunned</span></i>
-            <i class="fa-solid fa-ban incapacitated w3-tooltip ${activate('incapacitated')}"><span class="w3-text w3-tag">Incapacitated</span></i>
-            <i class="fa-solid fa-bed unconscious w3-tooltip ${activate('unconscious')}"><span class="w3-text w3-tag">Unconscious</span></i>
-            <i class="fa-solid fa-skull dead w3-tooltip ${activate('dead')}"><span class="w3-text w3-tag">Dead</span></i>
-        </div>
+        let c = new Character(name, AC, initiative, curHP, maxHP, conditions, notes, id);
+        characters.push(c);
+    });
+    return characters;
+}
 
-        <div class="w3-container w3-hide notes">
-           <textarea class="notes-input w3-left" placeholder="Enter notes here...">${character.notes}</textarea>
-        </div>
-    
-    </div>`
+// Returns list of all character objects, sorted by initiative
+function get_all_characters() {
+    let characters = get_characters("left").concat(get_characters("right"));
+    characters.sort((a, b) => b.initiative - a.initiative);
+    return characters;
 }
 
 // Add card for character on given side (left or right)
 function add_card(side, character) {
-    let html = generate_card(character);
+    // Add html to document
+    let html = character.generate_card_html();
     let div = $(`#${side} div.card-area`); // select div element to add card to
     div.append(html);
+
+    // Add reference to card to character object
+    character.card = $("#" + character.id);
+
+    // Add character to global list
+    CHARACTERS.add(character);
 }
 
 // Save data for the given side(left or right) to a JSON file
@@ -94,7 +69,7 @@ function save_side(side) {
     let filename = (side === "left") ? "party.json" : "enemy.json";
 
     // Get data in JSON format
-    let characters = get_characters(side);
+    let characters = get_characters(side).map(c => c.to_JSON());
     let data = JSON.stringify(characters);
 
     // Create download link
@@ -120,30 +95,17 @@ function load_side(side) {
 
     // Add listener on reader, pass file to reader
     reader.addEventListener("load", function () {
-        let characters = JSON.parse(this.result);
+        let data = JSON.parse(this.result);
         // For each character, add card to the appropriate side
-        characters.forEach(c => {
-            add_card(side, c);
+        data.forEach(obj => {
+            let character = new Character();
+            character.from_JSON(obj);
+            add_card(side, character);
         });
     });
 
     // Fire event
     reader.readAsText(file);
-}
-
-// Sorts side(left or right) by initiative
-function sort(side) {
-
-    // Get characters on this side and sort them by decreasing initiative
-    let characters = get_characters(side);
-    characters.sort((a, b) => b.initiative - a.initiative);
-
-    // Remove all cards on the side and put them back in right order
-    let card_area = $("#" + side + " .card-area");
-    card_area.empty();
-    characters.forEach(c => {
-        add_card(side, c);
-    })
 }
 
 // Parses card to determine which conditions it has
@@ -165,35 +127,6 @@ function get_conditions(card) {
     });
 
     return conditions;
-}
-
-
-// Returns list of Character objects on the given side(left or right)
-function get_characters(side) {
-    let cards = $("#" + side).find(".w3-card");
-    let characters = [];
-
-    cards.each(function () {
-        let card = $(this);
-        let name = card.find(".name-input").val();
-        let AC = Number(card.find(".AC-input").val());
-        let initiative = Number(card.find(".initiative-input").val());
-        let curHP = Number(card.find(".curHP-input").val());
-        let maxHP = Number(card.find(".maxHP-input").val());
-        let conditions = get_conditions(card);
-        let notes = card.find(".notes-input").val();
-
-        let c = make_character(name, AC, initiative, curHP, maxHP, conditions, notes);
-        characters.push(c);
-    });
-    return characters;
-}
-
-// Returns list of all character objects, sorted by initiative
-function get_all_characters() {
-    let characters = get_characters("left").concat(get_characters("right"));
-    characters.sort((a, b) => b.initiative - a.initiative);
-    return characters;
 }
 
 // Button is jquery reference to button that was clicked
@@ -218,6 +151,21 @@ function heal_damage(button, operation) {
     else {
         console.log("ERROR: unknown heal-damage operation");
     }
+}
+
+// Sorts side(left or right) by initiative
+function sort(side) {
+
+    // Get characters on this side and sort them by decreasing initiative
+    let characters = get_characters(side);
+    characters.sort((a, b) => b.initiative - a.initiative);
+
+    // Remove all cards on the side and put them back in right order
+    let card_area = $("#" + side + " .card-area");
+    card_area.empty();
+    characters.forEach(c => {
+        add_card(side, c);
+    })
 }
 
 
@@ -276,7 +224,9 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".delete", function () {
-        $(this).parent().parent().remove();
+        let card = $(this).parent().parent();
+        CHARACTERS.remove(x => x.id === Number(card.id));
+        card.remove();
     });
 
     $(document).on("click", ".heal", function () {
@@ -297,6 +247,13 @@ $(document).ready(function () {
         let notes = $(this).parent().find(".conditions");
         notes.toggleClass("w3-hide");
         notes.toggleClass("w3-show");
+    });
+
+    // FOR DEBUGGING
+    $("#next-turn").click(() => {
+        let cs = get_characters("left");
+        console.log(cs);
+        console.log(cs.map(x => x.to_JSON()));
     });
 });
 // -----------------------------------------------------
