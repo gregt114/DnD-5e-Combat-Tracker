@@ -18,7 +18,6 @@ A web app for tracking combat in DnD 5e.
 - Frontend
     - Make how-to-use page
 - Backend
-    - SQLlite + db setup
+    - Delete backend stuff
 - Deployment
-    - Deploy on Digital Ocean droplet or PythonAnywhere
-    - Gunicorn WSGI server
+    - Host on github pages
