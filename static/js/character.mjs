@@ -8,8 +8,6 @@ export class Character {
         this.maxHP = maxHP;             // number
         this.conditions = conditions;   // {key1: bool, key2: bool, ...}
         this.notes = notes;             // string
-        this.id = id;                   // number
-        this.card = null;               // JQuery result
     }
 
     // Returns card HTML for a given Character object
@@ -19,7 +17,7 @@ export class Character {
         // Adds dark overlay on dead characters
         let dampen = "dead" in this.conditions ? (this.conditions.dead ? "dampen" : "") : "";
 
-        return `<div id="${this.id}" class="w3-card ${dampen}">
+        return `<div class="w3-card ${dampen}">
             <div class="w3-container card-header">
                 <input class="name-input w3-half" type="text" placeholder="Name" value="${this.name}">
                 <div class="w3-container w3-half stats">
@@ -40,6 +38,7 @@ export class Character {
             <div class="w3-container card-footer">
                 <button class="w3-button w3-left show-conditions">Conditions</button>
                 <button class="w3-button w3-center show-notes">Notes</button>
+                <button class="w3-button w3-center set-turn">Set Turn</button>
                 <button class="w3-button w3-right delete">
                     <i class="fa-solid fa-trash-can"></i>
                 </button>
@@ -81,7 +80,6 @@ export class Character {
             "maxHP": this.maxHP,
             "conditions": this.conditions,
             "notes": this.notes,
-            "id": this.id,
         }
     }
 
@@ -94,7 +92,6 @@ export class Character {
         this.maxHP = json.maxHP;
         this.conditions = json.conditions;
         this.notes = json.notes;
-        this.id = json.id;
     }
 
 }

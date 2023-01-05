@@ -1,10 +1,5 @@
-import { DoublyLinkedCircularList as LinkedList } from "./linked_list.mjs";
 import { Character } from "./character.mjs"
 
-// Global variables
-let CUR_ID = 0;
-let CHARACTERS = new LinkedList();
-// ---------------
 
 // Returns random integer in range [min, max]
 function rand_int(min, max) {
@@ -14,8 +9,7 @@ function rand_int(min, max) {
 
 // Returns empty character
 function empty_character() {
-    let c = new Character("", 0, 0, 0, 0, {}, "", CUR_ID);
-    CUR_ID += 1;
+    let c = new Character("", 0, 0, 0, 0, {}, "");
     return c;
 }
 
@@ -42,12 +36,6 @@ function get_characters(side) {
     return characters;
 }
 
-// Returns list of all character objects, sorted by initiative
-function get_all_characters() {
-    let characters = get_characters("left").concat(get_characters("right"));
-    characters.sort((a, b) => b.initiative - a.initiative);
-    return characters;
-}
 
 // Add card for character on given side (left or right)
 function add_card(side, character) {
@@ -55,9 +43,6 @@ function add_card(side, character) {
     let html = character.generate_card_html();
     let div = $(`#${side} div.card-area`); // select div element to add card to
     div.append(html);
-
-    // Add character to global list
-    CHARACTERS.add(character);
 }
 
 // Save data for the given side(left or right) to a JSON file
@@ -222,8 +207,13 @@ $(document).ready(function () {
 
     $(document).on("click", ".delete", function () {
         let card = $(this).parent().parent();
-        //CHARACTERS.remove(x => x.id === Number(card.id)); TODO remove
         card.remove();
+    });
+
+    // When initiative label is clicked, card is highlighted
+    $(document).on("click", ".set-turn", function () {
+        let card = $(this).closest(".w3-card");
+        card.toggleClass("my-turn");
     });
 
     $(document).on("click", ".heal", function () {
@@ -246,40 +236,5 @@ $(document).ready(function () {
         notes.toggleClass("w3-show");
     });
 
-    // Turn system
-    // TODO: add styling on current card
-    $("#next-turn").click(() => {
-        let round = $("#round");
-        let round_num = Number(round.val());
-        let turn = $("#turn");
-        let turn_num = Number(turn.val());
-
-        // If something already has my-turn class, disable class
-        $(".my-turn").toggleClass("my-turn");
-
-
-        // Start combat
-        if (round_num === 0 && turn_num === 0) {
-            // Store characters in sorted order in circular linked list(CHARACTERS)
-            // let character_list = get_all_characters();
-            // CHARACTERS.empty(); // Clear list before adding
-            // character_list.forEach(c => {
-            //     CHARACTERS.add(c);
-            // });
-            round.val(1);
-            turn.val(1);
-        } // Made one full rotation, reset counters
-        else if (CHARACTERS.peek().id === CHARACTERS.getHead().id) {
-            round.val(round_num + 1);
-            turn.val(1);
-            CHARACTERS.next();
-        } // Mid-round
-        else {
-            turn.val(turn_num + 1);
-            CHARACTERS.next();
-        }
-
-        $("#" + CHARACTERS.get().id).toggleClass("my-turn");
-    });
 });
 // -----------------------------------------------------
