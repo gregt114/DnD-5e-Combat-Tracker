@@ -30,7 +30,106 @@
         <a class="w3-button top-button" href="./instructions.html">Instructions</a>
     </p>
 
+    <div class="content w3-center">
+        <h1>About</h1>
+        <p>
+            This webpage can be used to help you mange combat encounter in Dungeons and Dragons 5th Edition.
+        </p>
+
+        <h1>Adding Characters <i class="fa fa-plus"></i></h1>
+        <p>
+            You can add characters to the party(left side) or enemy(right side) using the "Add Member" or "Add Enemy"
+            buttons. This will create a character box where you can enter their information.
+        </p>
+
+        <h1>Deleting Characters <i class="fa-solid fa-trash-can"></i></h1>
+        <p>
+            Deleting characters is very straightforward: simply click the trash icon in the lower right of the
+            character's box. Note that there is no "undo" button; once you delete a character, you will have to re-enter
+            all of their details in order to get them back.
+        </p>
+
+        <h1>Saving Groups <i class="fa-solid fa-download"></i></h1>
+        <p>
+            You can save the party and/or the enemy's data by clicking the "Save Party" or "Save Enemies" button
+            respectively. This will download a JSON file that encodes all of the data for that group. A JSON file
+            is essentially just a text file with a special structure.
+        </p>
+
+        <h1>Loading Groups</h1>
+        <p>
+            Once you have saved a group, you can load its data back into the webpage by clicking on the "Upload Previous
+            Party" or "Upload Previous Enemy" buttons and selecting the JSON file you downloaded earlier.
+        </p>
+
+        <h1>Healing & Damage</h1>
+        <p>
+            In every character box there are two buttons labelled "Heal" and "Damage". By entering a number into the
+            input box between these two buttons and clicking either "Heal" or "Damage", the charater's new HP will
+            automatically be calculated and set. Note that the character must have both HP fields set with valid numbers
+            in order for this to work properly. The number input accpets both positive and negative numbers.
+        </p>
+
+        <h1>Conditions</h1>
+        <p>
+            By clicking on the "Conditions" button in a character's box, you can display the conditions menu.
+            Clicking on an icon will set the corresponding condition for that character. Hovering over an icon
+            with your mouse will tell you what condition the icon represents. Closing the menu will not
+            remove any conditions. Saving your party/enemies also saves their conditions.
+        </p>
+
+        <h1>Notes</h1>
+        <p>
+            By clicking on the "Show Notes" button in a character's box, you can display the notes menu.
+            This opens up a textbox where free-form text can be entered. This can be used to add additional
+            notes on characters or even list their abilities, traits, spells, etc... . The notes for each character
+            are save when the party/enemy is saved.
+        </p>
+
+        <h1 style="color: magenta">Set Turn</h1>
+        <p>
+            When the "Set Turn" button is clicked in a character's box, their box will be highlighted.
+            This simply makes it easier to remember/tell whose turn is currently in progress. Clicking "Set Turn"
+            on another character box automatically changes which box is highlighted. To remove the highlight,
+            simply click the "Set Turn" button on the highlighted box.
+        </p>
+
+        <h1>Auto Roll Initiative <i class="fa-solid fa-dice"></i></h1>
+        <p>
+            When the "Auto Roll Initiative" button is clicked, all enemies are given a random intiative between
+            1 and 20. This does not include the effects of Dex modifiers, items, magic, etc...; those
+            adjusmtents
+            must be done manually. This is just to make it faster to get encounters up and running faster.
+        </p>
+
+        <h1>Sort <i class="fa-solid fa-shuffle"></i></h1>
+        <p>
+            When the "Sort" button is clicked, the character boxes on that side will be rearranged so that
+            the characters are sorted by initiative in decreasing order. This makes it easier to tell whose
+            turn is next. Note that every character must have a valid numerical intiative in order for this to
+            work properly.
+        </p>
+
+
+        <h1 style="color: red">Warning</h1>
+        <p>
+            DO NOT REFRESH THE PAGE UNLESS YOU WANT TO LOSE EVERYTHING! This site does not require you to
+            refresh the page in order to apply updates or perform calculations. Refreshing the page will
+            delete all characters, so you will lose them unless you have saved them to a JSON file.
+        </p>
+    </div>
 </body>
 
+<style>
+    .content {
+        width: 60%;
+        border: 1px solid white;
+        margin-left: 20%;
+    }
+
+    p {
+        text-align: left;
+    }
+</style>
 
 </html>
