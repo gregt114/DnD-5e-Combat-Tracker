@@ -212,6 +212,19 @@ $(document).ready(function () {
 
     // When initiative label is clicked, card is highlighted
     $(document).on("click", ".set-turn", function () {
+
+        // If parent card already has turn set, remove it
+        let parent_card = $(this).closest(".w3-card");
+        if (parent_card.attr("class").includes("my-turn")) {
+            parent_card.toggleClass("my-turn");
+            return;
+        }
+        // If non-parent card already has turn set, remove it
+        let current = $(".my-turn").closest(".w3-card");
+        if (current.length != 0) {
+            current.toggleClass("my-turn");
+        }
+        // Set turn on new card
         let card = $(this).closest(".w3-card");
         card.toggleClass("my-turn");
     });
