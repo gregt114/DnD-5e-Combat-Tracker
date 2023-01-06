@@ -3,21 +3,12 @@
 A web app for tracking combat in DnD 5e.
 
 ## Requirements
-- Flask
-- Python
+- Any modern web browser
 
 ## Use
-- ```virtualenv venv``` to create virtual env.
-- ```.\venv\Scripts\activate``` to activate virtual env.
-- ```pip install -r requirements.txt``` to install dependencies
-- ```deactivate``` to deactivate virtual env.
-- ```py app.py``` to run the local server
+- Run ```python -m http.server 5000``` in the same directory as the project to host a local dev server on port 5000.
+
 
 ## TODO
 
-- Frontend
-    - Make how-to-use page
-- Backend
-    - Delete backend stuff
-- Deployment
-    - Host on github pages
+- None for now
